@@ -1,28 +1,22 @@
-/*import React from "react";
-
-function SearchBar() {
-    return (
-        <>
-        <form>
-        <label for="songName">Song Search:</label>
-        <input type="text" id="songName"></input>
-        <input type="submit" value="Search"></input>
-        </form>
-        </>
-        
-    )
-}
-export default SearchBar;*/
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 
-function SearchBar () {
+function SearchBar (props) {
+  const [term, setTerm] = useState("");
+
+  function passTerm() {
+    props.onSearch(term);
+  }
+
+  function handleTermChange({target}) {
+    setTerm(target.value);
+  }
     return (
         <div className={styles.SearchBar}>
         <input
           placeholder="Enter A Song, Album, or Artist"
-        />
-        <button className="SearchButton" >
+          onChange={handleTermChange}/>
+        <button className={styles.SearchButton} onClick={passTerm} >
           SEARCH
         </button>
       </div>
